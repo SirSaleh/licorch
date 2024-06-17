@@ -25,6 +25,7 @@ class BFS:
                 nodes_queue.append(current_node.right)
 
             visited.append(current_node)
+            hook(current_node)
         
         return visited
 
