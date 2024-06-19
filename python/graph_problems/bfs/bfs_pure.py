@@ -2,6 +2,7 @@
 """
 from collections import deque
 
+
 class Node:
 
     def __init__(self, val, left=None, right=None):
@@ -30,15 +31,21 @@ class BFS:
         return visited
 
 
-if __name__== "__main__":
-    node_20 = Node(20, None, None)
-    node_40 = Node(40, None, None)
-    node_60 = Node(60, None, None)
-    node_500 = Node(500, None, None)
+if __name__ == "__main__":
+    import sys
+    import os
 
-    node_60.right = node_500
-    node_20.right = node_40
-    node_20.left = node_60
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    utils_dir = os.path.abspath(os.path.join(current_dir, '..', 'utils'))
+    sys.path.append(utils_dir)
+
+    from tree_generator import RandomTreeGenerator
+    
+    tree_gen = RandomTreeGenerator(7, [0, 10])
+    root = tree_gen.generate_random_tree()
 
     bfs = BFS()
-    bfs.solve(root=node_20)
+
+    solved_bfs = bfs.solve(root=root)
+    assert solved_bfs.__len__() == 7
+    print("solved bfs length of traversal was", solved_bfs.__len__())
