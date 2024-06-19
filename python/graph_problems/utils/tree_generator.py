@@ -1,7 +1,6 @@
 import random
 from collections import deque
 
-
 class Node:
     def __init__(self, val, left=None, right=None):
         self.val = val
@@ -21,27 +20,20 @@ class RandomTreeGenerator:
         values = random.sample(range(*self.value_range), self.node_count)
         nodes = [Node(val) for val in values]
         
-        # Randomly assign left and right children
-        for node in nodes:
-            if random.choice([True, False]):
-                potential_left = [n for n in nodes if n is not node and n.left is None and n.right is None]
-                if potential_left:
-                    node.left = random.choice(potential_left)
-                    nodes.remove(node.left)
-            if random.choice([True, False]):
-                potential_right = [n for n in nodes if n is not node and n.left is None and n.right is None]
-                if potential_right:
-                    node.right = random.choice(potential_right)
-                    nodes.remove(node.right)
+        # Assign children to each node to form a valid tree
+        for i in range(1, len(nodes)):
+            parent_index = random.randint(0, i - 1)
+            if not nodes[parent_index].left:
+                nodes[parent_index].left = nodes[i]
+            else:
+                nodes[parent_index].right = nodes[i]
         
         return nodes[0]  # Return the root node
 
 # Example usage
 if __name__ == "__main__":
-    tree_generator = RandomTreeGenerator(node_count=4, value_range=(1, 1000))
+    tree_generator = RandomTreeGenerator(node_count=7, value_range=(1, 1000))
     root = tree_generator.generate_random_tree()
-
-    print(root)
     
     # BFS to print the tree structure
     def bfs_print(root):
