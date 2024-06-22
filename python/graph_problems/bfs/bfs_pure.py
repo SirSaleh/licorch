@@ -2,15 +2,6 @@
 """
 from collections import deque
 
-
-class Node:
-
-    def __init__(self, val, left=None, right=None):
-        self.left = left
-        self.right = right
-        self.val = None
-
-
 class BFS:
 
     def solve(self, root, hook=lambda x: None):
