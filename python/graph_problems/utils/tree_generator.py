@@ -25,8 +25,22 @@ class RandomTreeGenerator:
             parent_index = random.randint(0, i - 1)
             if not nodes[parent_index].left:
                 nodes[parent_index].left = nodes[i]
-            else:
+            elif not nodes[parent_index].right:
                 nodes[parent_index].right = nodes[i]
+            else:
+                # If both child spots are taken, force assignment to the first available slot
+                queue = deque([nodes[parent_index]])
+                while queue:
+                    current_node = queue.popleft()
+                    if not current_node.left:
+                        current_node.left = nodes[i]
+                        break
+                    elif not current_node.right:
+                        current_node.right = nodes[i]
+                        break
+                    else:
+                        queue.append(current_node.left)
+                        queue.append(current_node.right)
         
         return nodes[0]  # Return the root node
 
