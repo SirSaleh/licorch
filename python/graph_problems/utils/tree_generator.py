@@ -6,6 +6,9 @@ class Node:
         self.val = val
         self.left = left
         self.right = right
+    
+    def __str__(self):
+        return "node ("+str(self.val)+")"
 
 class RandomTreeGenerator:
     def __init__(self, node_count, value_range):
