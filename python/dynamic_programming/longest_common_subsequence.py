@@ -3,6 +3,8 @@
 class Solution(object):
 
     def from_bottom(self, text1, text2):
+        """solves LCS bottom up order
+        """
         memo = [[0 for j in range(len(text2) + 1)] for i in range(len(text1) + 1)]        
         
         for i in range(len(text1) - 1, -1, -1):
@@ -15,13 +17,7 @@ class Solution(object):
         return memo[0][0]
     
     def from_top(self, text1, text2):
-        """
-            - - a g f
-            - 0 0 0 0  
-            b 0
-            g 0
-            h 0
-            f 0
+        """solves LCS in Top-Down order 
         """
         memo = [[0] * (len(text2) + 1) for x in range(len(text1) + 1)]
 
